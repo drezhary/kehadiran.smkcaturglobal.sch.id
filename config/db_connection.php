@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'smkcaturglobalsc';
+$dbname = 'smkcaturglobalsc_kehadiran';
 $username = 'smkcatur_admin';
 $password = 'SMKC4turGl0b4l#314';
 
