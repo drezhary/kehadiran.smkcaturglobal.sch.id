@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Kehadiran</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            background-color: #f8f9fa;
+            border-right: 1px solid #ddd;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            padding: 15px 20px;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #e9ecef;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <h4 class="text-center mt-3">Admin Dashboard</h4>
+        <hr>
+        <a href="#">Laporan Kehadiran</a>
+        <a href="#">Data Guru</a>
+        <a href="#">Pengaturan</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Laporan Kehadiran Guru</h2>
+            <button class="btn btn-success">Export Laporan (PDF/Excel)</button>
+        </div>
+
+        <!-- Filter -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form class="row g-3">
+                    <div class="col-md-4">
+                        <label for="filterNama" class="form-label">Nama Guru</label>
+                        <input type="text" class="form-control" id="filterNama" placeholder="Cari nama guru">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="filterTanggal" class="form-label">Tanggal</label>
+                        <input type="date" class="form-control" id="filterTanggal">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabel Data Kehadiran -->
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Guru</th>
+                            <th>Tanggal</th>
+                            <th>Waktu Kehadiran</th>
+                            <th>Status</th>
+                            <th>Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Ahmad</td>
+                            <td>2025-01-13</td>
+                            <td>07:30</td>
+                            <td><span class="badge bg-success">Hadir</span></td>
+                            <td><img src="foto1.jpg" alt="Foto Kehadiran" width="50"></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Siti</td>
+                            <td>2025-01-13</td>
+                            <td>07:45</td>
+                            <td><span class="badge bg-warning">Terlambat</span></td>
+                            <td><img src="foto2.jpg" alt="Foto Kehadiran" width="50"></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Rahmat</td>
+                            <td>2025-01-13</td>
+                            <td>-</td>
+                            <td><span class="badge bg-danger">Tidak Hadir</span></td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
