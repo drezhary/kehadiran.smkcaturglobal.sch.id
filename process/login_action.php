@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['kode_guru'])) {
         exit();
     } else {
         // Redirect kembali ke halaman login jika kode guru tidak valid
-        header('Location: index.php?error=true');
+        header('Location: ../index.php?error=true');
         exit();
     }
 } else {

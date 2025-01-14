@@ -23,18 +23,26 @@ if (isset($_SESSION['kode_guru'])) {
 
 <body class="bg-light">
     <div class="container d-flex justify-content-center align-items-center vh-100">
-        <?php if (isset($_GET['error']) && $_GET['error'] == 'true'): ?>
-            <div class="alert alert-danger" role="alert">
-                Kode guru tidak valid.
+        <div class="card p-4 shadow-lg" style="width: 400px;">
+            <!-- Logo dan Judul -->
+            <div class="text-center mb-4">
+                <img src="../kehadiran.smkcaturglobal.sch.id/assets/logo.jpeg" alt="Logo Aplikasi" class="mb-3" style="width: 100px;">
+                <h4 class="fw-bold">Aplikasi Kehadiran Guru</h4>
             </div>
-        <?php endif; ?>
-        <form action="process/login_action.php" method="POST">
-            <div class="mb-3">
-                <label for="kode_guru" class="form-label">Kode Guru</label>
-                <input type="text" class="form-control" id="kode_guru" name="kode_guru" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+
+            <!-- Form Login -->
+            <form action="process/login_action.php" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="kode_guru" name="kode_guru" placeholder="Masukkan Kode Guru" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <?php if (isset($_GET['error']) && $_GET['error'] == 'true'): ?>
+                    <div class="alert alert-danger mt-3" role="alert">
+                        Kode guru tidak valid.
+                    </div>
+                <?php endif; ?>
+            </form>
+        </div>
     </div>
 </body>
 
