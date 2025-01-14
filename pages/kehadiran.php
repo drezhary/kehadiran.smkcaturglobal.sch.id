@@ -26,14 +26,14 @@ if (!isset($_SESSION['kode_guru'])) {
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Catat Kehadiran</h5>
-                <form id="attendanceForm">
+                <form id="attendanceForm" action="../process/attendance_action.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="kodeGuru" class="form-label">Kode Guru</label>
-                        <input type="text" class="form-control" id="kodeGuru" readonly value=<?php echo $_SESSION['kode_guru']; ?>>
+                        <input type="text" class="form-control" id="kodeGuru" name="kode_guru" readonly value=<?php echo $_SESSION['kode_guru']; ?>>
                     </div>
                     <div class="mb-3">
                         <label for="fotoKehadiran" class="form-label">Foto Kehadiran</label>
-                        <input type="file" class="form-control" id="fotoKehadiran" accept="image/*" required>
+                        <input type="file" class="form-control" id="fotoKehadiran" accept="image/*" name="foto_hadir" capture="environment" required>
                     </div>
                     <button type="submit" class="btn btn-success">Hadir</button>
                     <a href="../process/logout_action.php" class="btn btn-danger">Logout</a>
