@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/smkcaturglobalsc/public_html/kehadiran.smkcaturglobal.sch.id
+    - /bin/cp -r ./* $DEPLOYPATH
