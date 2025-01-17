@@ -1,0 +1,7 @@
+[14-Jan-2025 15:43:20 Asia/Bangkok] PHP Warning:  move_uploaded_file(../assets/uploads/foto_678623a8259826.29524090.jpeg): failed to open stream: No such file or directory in /home/smkcaturglobalsc/public_html/kehadiran.smkcaturglobal.sch.id/process/attendance_action.php on line 60
+[14-Jan-2025 15:43:20 Asia/Bangkok] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/php0qZSHa' to '../assets/uploads/foto_678623a8259826.29524090.jpeg' in /home/smkcaturglobalsc/public_html/kehadiran.smkcaturglobal.sch.id/process/attendance_action.php on line 60
+[14-Jan-2025 15:53:01 Asia/Bangkok] PHP Fatal error:  Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '14-01-2025' for column 'tanggal' at row 1 in /home/smkcaturglobalsc/public_html/kehadiran.smkcaturglobal.sch.id/process/attendance_action.php:81
+Stack trace:
+#0 /home/smkcaturglobalsc/public_html/kehadiran.smkcaturglobal.sch.id/process/attendance_action.php(81): PDOStatement->execute()
+#1 {main}
+  thrown in /home/smkcaturglobalsc/public_html/kehadiran.smkcaturglobal.sch.id/process/attendance_action.php on line 81

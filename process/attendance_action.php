@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Ambil data dari form
     $kode_guru = $_SESSION['kode_guru'];
-    $tanggal = date('d-m-Y'); // format tanggal: tanggal-bulan-tahun
+    $tanggal = date('Y-m-d'); // format tanggal: tanggal-bulan-tahun
     $waktu = date('H:i:s'); // waktu saat ini
     $status = 'Hadir'; // Default status kehadiran
     $foto_hadir = null;
@@ -44,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Foto kehadiran harus berupa gambar");
         }
 
-        // validasi jika ukuran file lebih dari 2MB
-        if ($fotosize > 2 * 1024 * 1024) {
-            die("Ukuran foto kehadiran maksimal 2MB");
-        }
+        // // validasi jika ukuran file lebih dari 2MB
+        // if ($fotosize > 2 * 1024 * 1024) {
+        //     die("Ukuran foto kehadiran maksimal 2MB");
+        // }
 
         // Tentukan lokasi penyimpanan foto
         $fotoNewName = uniqid('foto_', true) . '.' . $fotoExt;
@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Simpan path foto ke database
         $foto_hadir = $fotoUploadPath;
     } else {
+        var_dump($_FILES['foto_hadir']);
         die("Foto kehadiran wajib diunggah");
     }
     // Masukkan data ke tabel kehadiran

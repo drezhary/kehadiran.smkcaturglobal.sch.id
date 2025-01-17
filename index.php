@@ -26,7 +26,7 @@ if (isset($_SESSION['kode_guru'])) {
         <div class="card p-4 shadow-lg" style="width: 400px;">
             <!-- Logo dan Judul -->
             <div class="text-center mb-4">
-                <img src="../kehadiran.smkcaturglobal.sch.id/assets/logo.jpeg" alt="Logo Aplikasi" class="mb-3" style="width: 100px;">
+                <img src="/assets/logo.jpeg" alt="Logo Aplikasi" class="mb-3" style="width: 100px;">
                 <h4 class="fw-bold">Aplikasi Kehadiran Guru</h4>
             </div>
 
