@@ -1,5 +1,7 @@
 <?php
 session_start();
+require '../config/db_connection.php';
+
 
 // Cek apakah user sudah login
 if (!isset($_SESSION['kode_guru'])) {
@@ -29,7 +31,7 @@ if (!isset($_SESSION['kode_guru'])) {
                 <form id="attendanceForm" action="../process/attendance_action.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="kodeGuru" class="form-label">Kode Guru</label>
-                        <input type="text" class="form-control" id="kodeGuru" name="kode_guru" readonly value=<?php echo $_SESSION['kode_guru']; ?>>
+                        <input type="text" class="form-control" id="kodeGuru" name="kode_guru" readonly value="<?php echo $_SESSION['kode_guru']; ?>">
                     </div>
                     <div class="mb-3">
                         <label for="fotoKehadiran" class="form-label">Foto Kehadiran</label>
@@ -42,6 +44,10 @@ if (!isset($_SESSION['kode_guru'])) {
         </div>
 
         <!-- Tabel Kehadiran -->
+        <?php
+        $stmt = $pdo->query("SELECT * FROM kehadiran");
+
+        ?>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Catatan Kehadiran</h5>
@@ -52,22 +58,28 @@ if (!isset($_SESSION['kode_guru'])) {
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
+                                <th>Status</th>
                                 <th>Foto</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2025-01-13</td>
-                                <td>07:30</td>
-                                <td><img src="foto1.jpg" alt="Foto Kehadiran" width="50"></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2025-01-12</td>
-                                <td>07:35</td>
-                                <td><img src="foto2.jpg" alt="Foto Kehadiran" width="50"></td>
-                            </tr>
+                            <?php
+                            $stmt = $pdo->query("SELECT * FROM kehadiran WHERE kode_guru = '" . htmlspecialchars($_SESSION['kode_guru']) . "'");
+                            if ($stmt->rowCount() > 0) {
+                                $no = 1;
+                                while ($baris = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $no++ . "</td>";
+                                    echo "<td>" . htmlspecialchars($baris['tanggal']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($baris['waktu_hadir']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($baris['status']) . "</td>";
+                                    echo "<td><img src='" . htmlspecialchars($baris['foto_hadir']) . "' alt='Foto Kehadiran' width='100'></td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>Tidak ada data kehadiran</td></tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
