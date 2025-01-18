@@ -74,9 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     var_dump($stmt);
 
     if ($stmt) {
+        // Jika guru hadir sebelum jam 07.30
         $stmt->bindParam(1, $kode_guru);
         $stmt->bindParam(2, $tanggal);
         $stmt->bindParam(3, $waktu);
+
+        // Memeriksa apakah waktu_hadir lebih dari 07.30
+        if (strtotime($waktu) > strtotime('07:30:30')) {
+            $status = 'Terlambat';
+        }
         $stmt->bindParam(4, $status);
         $stmt->bindParam(5, $foto_hadir);
         if ($stmt->execute()) {
