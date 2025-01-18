@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Ambil data dari form
     $kode_guru = $_SESSION['kode_guru'];
-    $tanggal = date('Y-m-d'); // format tanggal: tanggal-bulan-tahun
+    $tanggal = date('Y-m-d'); // format tanggal: tahun - bulan - tanggal
     $waktu = date('H:i:s'); // waktu saat ini
     $status = 'Hadir'; // Default status kehadiran
     $foto_hadir = null;
