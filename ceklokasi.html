@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periksa Lokasi</title>
+</head>
+
+<body>
+    <h1>Periksa Lokasi Anda</h1>
+    <button id="checkLocation">Periksa Lokasi</button>
+    <p id="result">Hasil: Belum diperiksa</p>
+
+    <script>
+        // Lokasi referensi (contoh: Jakarta)
+        const referenceLatitude = -6.2152191; // Latitude lokasi referensi
+        const referenceLongitude = 106.9947312; // Longitude lokasi referensi
+        const radiusThreshold = 500; // Radius batas dalam meter
+
+        // Fungsi untuk menghitung jarak menggunakan Haversine Formula
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371000; // Radius bumi dalam meter
+            const toRadians = (deg) => deg * (Math.PI / 180);
+            const dLat = toRadians(lat2 - lat1);
+            const dLon = toRadians(lon2 - lon1);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c; // Hasil dalam meter
+        }
+
+        // Event listener untuk tombol
+        document.getElementById('checkLocation').addEventListener('click', function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const userLatitude = position.coords.latitude;
+                    const userLongitude = position.coords.longitude;
+
+                    // Hitung jarak dari lokasi referensi
+                    const distance = calculateDistance(userLatitude, userLongitude, referenceLatitude, referenceLongitude);
+
+                    // Periksa apakah jarak berada dalam radius threshold
+                    if (distance <= radiusThreshold) {
+                        document.getElementById('result').innerText = `Hasil: Anda berada di lokasi dalam radius ${radiusThreshold} meter.`;
+                    } else {
+                        document.getElementById('result').innerText = `Hasil: Anda tidak berada di lokasi. Jarak Anda: ${Math.round(distance)} meter.`;
+                    }
+                }, function (error) {
+                    // Handle error jika geolocation tidak tersedia atau ditolak
+                    document.getElementById('result').innerText = `Gagal mendapatkan lokasi: ${error.message}`;
+                });
+            } else {
+                alert('Geolocation tidak didukung oleh browser ini.');
+            }
+        });
+    </script>
+</body>
+
+</html>
