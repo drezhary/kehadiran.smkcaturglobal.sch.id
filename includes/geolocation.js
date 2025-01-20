@@ -1,7 +1,7 @@
-// Lokasi referensi (contoh: Jakarta)
+// Lokasi referensi
 const referenceLatitude = -6.2152191; // Latitude lokasi referensi
 const referenceLongitude = 106.9947312; // Longitude lokasi referensi
-const radiusThreshold = 500; // Radius batas dalam meter
+const radiusThreshold = 600; // Radius batas dalam meter
 
 // Fungsi untuk menghitung jarak menggunakan Haversine Formula
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -27,7 +27,7 @@ function checkUserLocation() {
 
                 // Hitung jarak dari lokasi referensi
                 const distance = calculateDistance(userLatitude, userLongitude, referenceLatitude, referenceLongitude);
-
+                console.log(distance);
                 // Tampilkan hasil
                 if (distance <= radiusThreshold) {
                     resolve(true);

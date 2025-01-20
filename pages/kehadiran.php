@@ -52,7 +52,7 @@ if (!isset($_SESSION['kode_guru'])) {
                         <label for="fotoKehadiran" class="form-label">Foto Kehadiran</label>
                         <input type="file" class="form-control" id="fotoKehadiran" accept="image/*" name="foto_hadir" capture="environment" required>
                     </div>
-                    <button type="submit" class="btn btn-success" id="submit">Hadir</button>
+                    <button type="submit" class="btn btn-success" id="submitButton">Hadir</button>
                     <a href="../process/logout_action.php" class="btn btn-danger">Logout</a>
                 </form>
             </div>
@@ -60,8 +60,8 @@ if (!isset($_SESSION['kode_guru'])) {
 
         <!-- Tabel Kehadiran -->
         <?php
-        $stmt = $pdo->query("SELECT * FROM kehadiran");
-
+        $stmt = $pdo->query("SELECT * FROM kehadiran WHERE kode_guru = {$_SESSION['kode_guru']} ORDER BY tanggal DESC");
+        var_dump($stmt);
         ?>
         <div class="card">
             <div class="card-body">
@@ -79,7 +79,6 @@ if (!isset($_SESSION['kode_guru'])) {
                         </thead>
                         <tbody>
                             <?php
-                            $stmt = $pdo->query("SELECT * FROM kehadiran WHERE kode_guru = '" . htmlspecialchars($_SESSION['kode_guru']) . "'");
                             if ($stmt->rowCount() > 0) {
                                 $no = 1;
                                 while ($baris = $stmt->fetch(PDO::FETCH_ASSOC)) {
