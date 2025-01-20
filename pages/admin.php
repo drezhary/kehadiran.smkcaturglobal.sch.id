@@ -47,6 +47,7 @@
         <a href="#">Laporan Kehadiran</a>
         <a href="#">Data Guru</a>
         <a href="#">Pengaturan</a>
+        <a href="#">Logout</a>
     </nav>
 
     <!-- Content -->

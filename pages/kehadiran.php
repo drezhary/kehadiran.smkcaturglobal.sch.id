@@ -61,7 +61,6 @@ if (!isset($_SESSION['kode_guru'])) {
         <!-- Tabel Kehadiran -->
         <?php
         $stmt = $pdo->query("SELECT * FROM kehadiran WHERE kode_guru = {$_SESSION['kode_guru']} ORDER BY tanggal DESC");
-        var_dump($stmt);
         ?>
         <div class="card">
             <div class="card-body">

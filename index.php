@@ -36,6 +36,7 @@ if (isset($_SESSION['kode_guru'])) {
                     <input type="text" class="form-control" id="kode_guru" name="kode_guru" placeholder="Masukkan Kode Guru" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Login</button>
+                <a href="loginadmin.php">Login sebagai admin</a>
                 <?php if (isset($_GET['error']) && $_GET['error'] == 'true'): ?>
                     <div class="alert alert-danger mt-3" role="alert">
                         Kode guru tidak valid.
