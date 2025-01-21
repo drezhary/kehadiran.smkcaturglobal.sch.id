@@ -1,3 +1,14 @@
+<?php
+require '../config/db_connection.php';
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../loginadmin.php');
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +58,7 @@
         <a href="#">Laporan Kehadiran</a>
         <a href="#">Data Guru</a>
         <a href="#">Pengaturan</a>
-        <a href="#">Logout</a>
+        <a href="../process/logout_action.php">Logout</a>
     </nav>
 
     <!-- Content -->
@@ -118,22 +129,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ahmad</td>
-                                    <td>2025-01-13</td>
-                                    <td>07:30</td>
-                                    <td>Hadir</td>
-                                    <td><img src="foto1.jpg" alt="Foto" width="50"></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Siti</td>
-                                    <td>2025-01-13</td>
-                                    <td>07:45</td>
-                                    <td>Terlambat</td>
-                                    <td><img src="foto2.jpg" alt="Foto" width="50"></td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>

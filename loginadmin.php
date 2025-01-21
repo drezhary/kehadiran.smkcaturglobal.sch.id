@@ -1,41 +1,32 @@
 <?php
-
-include 'config/db_connection.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
+ini_set('display_errors', 1);
 session_start();
 
-// Handle form submission
+require 'config/db_connection.php';
+
+// Proses login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user = $_POST['user'];
-    $password = $_POST['password'];
+    $inputUsername = $_POST['username'] ?? '';
+    $inputPassword = $_POST['password'] ?? '';
 
-    // Validate input
-    if (empty($user) || empty($password)) {
-        $error = "User dan password wajib diisi.";
-    } else {
-        // Prepare and execute query
-        $stmt = $pdo->prepare("SELECT * FROM admin WHERE user = :user");
-        $stmt->bindParam(':user', $user);
-        $stmt->execute();
-        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!empty($inputUsername) && !empty($inputPassword)) {
+        // Query untuk mendapatkan data pengguna
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
+        $stmt->execute(['username' => $inputUsername]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Verify password
-        if ($admin) {
-            // Check if the password is hashed or plain text
-            if (password_verify($password, $admin['password']) || $password === $admin['password']) {
-                // Set session and redirect to admin.html
-                $_SESSION['admin_user'] = $admin['user'];
-                header("Location: pages/admin.php");
-                exit();
-            } else {
-                $error = "User atau password salah.";
-            }
+        if ($user && password_verify($inputPassword, $user['password'])) {
+            // Login berhasil
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            header("Location: pages/admin.php");
+            exit();
         } else {
-            $error = "User atau password salah.";
+            $error = "Username atau password salah.";
         }
+    } else {
+        $error = "Harap isi semua kolom.";
     }
 }
 ?>
@@ -60,9 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- Form Login -->
-            <form action="loginadmin.php" method="POST">
+            <form action="" method="POST">
                 <div class="mb-3">
-                    <input type="text" class="form-control" id="useradmin" name="user" placeholder="Masukkan username admin" required>
+                    <input type="text" class="form-control" id="user" name="username" placeholder="Masukkan username admin" required>
                 </div>
                 <div class="mb-3">
                     <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password admin" required>
