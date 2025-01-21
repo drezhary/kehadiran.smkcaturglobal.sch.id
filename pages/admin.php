@@ -53,9 +53,10 @@ if (!isset($_SESSION['user_id'])) {
 
     <!-- Sidebar -->
     <nav class="sidebar">
-        <h4 class="text-center mt-3">Admin Dashboard</h4>
-        <hr>
-        <a href="#">Laporan Kehadiran</a>
+        <a href="admin.php">
+            <h4 class="text-center mt-3">Admin Dashboard</h4>
+        </a>
+        <a href="report.html">Laporan Kehadiran</a>
         <a href="#">Data Guru</a>
         <a href="#">Pengaturan</a>
         <a href="../process/logout_action.php">Logout</a>
@@ -128,8 +129,27 @@ if (!isset($_SESSION['user_id'])) {
                                     <th>Foto</th>
                                 </tr>
                             </thead>
+                            <?php
+                            $stmt = $pdo->query("SELECT guru.nama_guru, kehadiran.tanggal, kehadiran.waktu_hadir, kehadiran.status,kehadiran.foto_hadir FROM guru INNER JOIN kehadiran on guru.kode_guru = kehadiran.kode_guru ORDER BY kehadiran.tanggal DESC;");
+                            ?>
                             <tbody>
-
+                                <?php
+                                if ($stmt->rowCount() > 0) {
+                                    $no = 1;
+                                    while ($baris = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $no++ . "</td>";
+                                        echo "<td>" . htmlspecialchars($baris['nama_guru']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($baris['tanggal']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($baris['waktu_hadir']) . "</td>";
+                                        echo "<td>" . htmlspecialchars($baris['status']) . "</td>";
+                                        echo "<td><img src='" . htmlspecialchars($baris['foto_hadir']) . "' alt='Foto Kehadiran' width='100'></td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan = '4'><td>Tidak ada kehadiran</tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
