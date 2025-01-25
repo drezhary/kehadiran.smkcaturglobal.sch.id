@@ -19,11 +19,17 @@ if (isset($_SESSION['kode_guru'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Guru</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .custom-shadow {
+            box-shadow: 0 4px 8px rgba(250, 88, 0, 0.83);
+            /* Change the color and intensity as needed */
+        }
+    </style>
 </head>
 
 <body class="bg-light">
     <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card p-4 shadow-lg" style="width: 400px;">
+        <div class="card p-4 custom-shadow" style="width: 400px;">
             <!-- Logo dan Judul -->
             <div class="text-center mb-4">
                 <img src="assets/logo.jpeg" alt="Logo Aplikasi" class="mb-3" style="width: 100px;">

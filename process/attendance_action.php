@@ -27,6 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Kode guru wajib diisi");
     }
 
+    // Periksa apakah pengguna sudah mengisi kehadiran hari ini
+    $queryCheck = "SELECT COUNT(*) FROM kehadiran WHERE kode_guru = ? AND tanggal = ?";
+    $stmtCheck = $pdo->prepare($queryCheck);
+    $stmtCheck->execute([$kode_guru, $tanggal]);
+    $kehadiranHariIni = $stmtCheck->fetchColumn();
+
+    if ($kehadiranHariIni > 0) {
+        echo "<script>alert('Anda sudah mengisi kehadiran hari ini.'); window.location.href = '../pages/kehadiran.php';</script>";
+        exit();
+    }
+
     // Proses upload foto
     if (isset($_FILES['foto_hadir']) && $_FILES['foto_hadir']['error'] === UPLOAD_ERR_OK) {
         $fotoTmpName = $_FILES['foto_hadir']['tmp_name'];
@@ -79,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Jika guru hadir sebelum jam 07.30
         $stmt->bindParam(1, $kode_guru);
         $stmt->bindParam(2, $tanggal);
+
         $stmt->bindParam(3, $waktu);
 
         // Memeriksa apakah waktu_hadir lebih dari 07.30
