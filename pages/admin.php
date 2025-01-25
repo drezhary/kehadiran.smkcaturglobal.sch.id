@@ -17,6 +17,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             display: flex;
@@ -116,7 +117,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Cari berdasarkan nama guru">
+                            <input type="text" class="form-control" id="search" placeholder="Cari berdasarkan nama guru">
                         </div>
                         <table class="table table-striped">
                             <thead>
@@ -130,9 +131,13 @@ if (!isset($_SESSION['user_id'])) {
                                 </tr>
                             </thead>
                             <?php
-                            $stmt = $pdo->query("SELECT guru.nama_guru, kehadiran.tanggal, kehadiran.waktu_hadir, kehadiran.status,kehadiran.foto_hadir FROM guru INNER JOIN kehadiran on guru.kode_guru = kehadiran.kode_guru ORDER BY kehadiran.tanggal DESC;");
+                            $sql = "SELECT guru.nama_guru, kehadiran.tanggal, kehadiran.waktu_hadir, kehadiran.status, kehadiran.foto_hadir 
+                     FROM guru 
+                     INNER JOIN kehadiran ON guru.kode_guru = kehadiran.kode_guru 
+                     ORDER BY kehadiran.tanggal DESC;";
+                            $stmt = $pdo->query($sql);
                             ?>
-                            <tbody>
+                            <tbody id="result">
                                 <?php
                                 if ($stmt->rowCount() > 0) {
                                     $no = 1;
@@ -159,6 +164,7 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../includes/search.js"></script>
 </body>
 
 </html>
