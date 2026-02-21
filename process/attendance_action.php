@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $kode_guru = $_SESSION['kode_guru'];
     $tanggal = date('Y-m-d'); // format tanggal: tahun - bulan - tanggal
     $waktu = date('H:i:s'); // waktu saat ini
-    $status = 'Hadir'; // Default status kehadiran
+    $status = 'Tidak Hadir'; // Default status kehadiran
     $foto_hadir = null;
     var_dump($kode_guru, $tanggal, $waktu, $status);
 
@@ -92,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(2, $tanggal);
 
         $stmt->bindParam(3, $waktu);
+        $status = 'Hadir';
 
         // Memeriksa apakah waktu_hadir lebih dari 07.30
         if (strtotime($waktu) > strtotime('07:30:30')) {
