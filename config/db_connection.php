@@ -1,8 +1,11 @@
 <?php
 $host = 'localhost';
 $dbname = 'smkcaturglobalsc_kehadiran';
-$username = 'smkcatur_admin';
-$password = 'SMKC4turGl0b4l#314';
+$username = 'dicky';
+$password = '12345';
+
+// $username = 'smkcatur_admin';
+// $password = 'SMKC4turGl0b4l#314';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

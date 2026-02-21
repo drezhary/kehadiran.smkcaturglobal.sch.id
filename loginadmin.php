@@ -7,6 +7,7 @@ require 'config/db_connection.php';
 
 // Proses login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // die("POST TERKIRIM");
     $inputUsername = $_POST['username'] ?? '';
     $inputPassword = $_POST['password'] ?? '';
 
@@ -15,10 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
         $stmt->execute(['username' => $inputUsername]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        // var_dump($user);
+        // exit();
 
         if ($user && password_verify($inputPassword, $user['password'])) {
             // Login berhasil
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
             header("Location: pages/admin.php");
             exit();
